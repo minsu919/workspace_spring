@@ -1,0 +1,24 @@
+# 이클립스 워크스페이스 설정 파일들
+.metadata/
+
+# Java 컴파일된 파일들
+/bin/
+*.class
+
+# 이클립스 프로젝트 설정 파일들
+.project
+.classpath
+
+# 로그 파일들
+*.log
+
+# 임시 파일들
+*.tmp
+
+# IDE 관련 캐시 파일들 (예: IntelliJ IDEA, NetBeans 등)
+.idea/
+*.iml
+
+# OS 관련 파일들
+.DS_Store   # macOS에서 생성되는 파일
+Thumbs.db   # Windows에서 생성되는 파일
