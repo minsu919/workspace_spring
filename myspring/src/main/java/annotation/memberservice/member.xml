@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+<!-- @Component @Service @Repository @AutoWired @qualifier -->
+<context:component-scan base-package="annotation.memberservice"></context:component-scan>
+
+	<bean id="dto1" class="annotation.memberservice.MemberDTO">
+		<property name="id" value="spring1"/>
+		<property name="pw" value="1111"/>
+		<property name="name" value="홍길동"/>
+		<property name="phone" value="010-2222-3333"/>
+		<property name="email" value="hong@kil.dong"/>
+		<property name="regdate" value="2024-12-30"/>
+	</bean>
+	
+	<bean id="dto2" class="annotation.memberservice.MemberDTO">
+		<property name="id" value="spring"/>
+		<property name="pw" value="1111"/>
+		<property name="name" value="이자바"/>
+		<property name="phone" value="010-0000-0000"/>
+		<property name="email" value="lee@java.bar"/>
+		<property name="regdate" value="2024/03/31"/>
+	</bean>
+
+	<bean id="dao2" class="annotation.memberservice.PointDAO">
+		<property name="point" value="1000"/>
+	</bean>
+<!-- 
+	<bean id="dao" class="annotation.memberservice.MemberDAO">
+		<property name="dto" ref="dto1"/>
+	</bean>
+	
+	<bean id="dao2" class="annotation.memberservice.PointDAO">
+		<property name="point" value="1000"/>
+	</bean>
+		
+	<bean id="basicservice" class="annotation.memberservice.MemberBasicService">
+	<property name="dao" ref="dao"/>
+	</bean>
+	
+	<bean id="pointservice" class="annotation.memberservice.MemberPointService">
+	<property name="dao" ref="dao"/>
+	<property name="dao2" ref="dao2"/>
+	</bean>
+ -->
+</beans>

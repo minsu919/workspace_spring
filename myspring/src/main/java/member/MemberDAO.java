@@ -1,9 +1,14 @@
 package member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class MemberDAO {
 	
 	MemberDTO dto;
-
+	
+	MemberDAO(MemberDTO dto){
+		this.dto = dto;
+	}
 	public void setDto(MemberDTO dto) {
 		this.dto = dto;
 	}

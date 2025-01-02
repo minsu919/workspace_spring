@@ -5,8 +5,12 @@ public class MemberDTO {
 	String id;
 	int pw;
 	String name, phone, email, regdate;
-	
-	
+	MemberDTO(){}
+	MemberDTO(String id, int pw){
+		this.id = id;
+		this.pw = pw;
+		
+	}
 	
 	public String getId() {
 		return id;

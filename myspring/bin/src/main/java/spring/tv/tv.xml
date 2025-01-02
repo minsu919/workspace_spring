@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- spring "tv" 객체 가져달라 요청하면 SamsungTV 생성 설정 -->
+<bean id="tv1" class="spring.tv.LgTV" scope="prototype"/>
+<bean id="tv2" class="spring.tv.SamsungTV" scope="prototype"/>
+</beans>
