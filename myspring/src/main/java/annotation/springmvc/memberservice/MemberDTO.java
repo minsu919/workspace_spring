@@ -1,4 +1,4 @@
-package annotation.memberservice;
+package annotation.springmvc.memberservice;
 
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ public class MemberDTO {
 	int pw;
 	String name, phone, email, regdate;
 	
-	public MemberDTO(){}
+	MemberDTO(){}
 	MemberDTO(String id, int pw){
 		this.id = id;
 		this.pw = pw;

@@ -14,6 +14,9 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	
+	<resources mapping="/upload/**" location="file:///c:/ezwel/upload" />
+	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -40,6 +43,17 @@
  -->	
 	
 	<context:component-scan base-package="annotation.springmvc"/>
+	<context:component-scan base-package="annotation.springmvc.upload"/>
+	<context:component-scan base-package="annotation.springmvc.memberlist"/>
+	<context:component-scan base-package="annotation.springmvc.*"/>
 	<context:component-scan base-package="movie"/>
 	
+	<!-- <interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:bean id="myinterceptor" class="interceptortest.MyInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors> -->
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 </beans:beans>

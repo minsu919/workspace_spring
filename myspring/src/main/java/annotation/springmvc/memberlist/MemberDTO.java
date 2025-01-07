@@ -1,15 +1,12 @@
-package annotation.memberservice;
+package annotation.springmvc.memberlist;
 
-import org.springframework.stereotype.Component;
-
-@Component("dto1")
 public class MemberDTO {
 
 	String id;
 	int pw;
 	String name, phone, email, regdate;
 	
-	public MemberDTO(){}
+	MemberDTO(){}
 	MemberDTO(String id, int pw){
 		this.id = id;
 		this.pw = pw;
