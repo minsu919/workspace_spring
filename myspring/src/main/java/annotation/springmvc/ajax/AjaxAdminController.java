@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import annotation.memberservice.MemberDTO;
+import annotation.springmvc.memberservice.MemberDTO;
+
 
 @Controller
 public class AjaxAdminController {
@@ -19,9 +20,8 @@ public class AjaxAdminController {
 		return "ajax/admin"; 
 	}
 	
-	@RequestMapping(value="/ajaxlisttest", produces = {"application/json;charset=utf-8"}) 
+	@RequestMapping(value="/ajaxadminlist", produces = {"application/json;charset=utf-8"}) 
 	public @ResponseBody ArrayList<MemberDTO>  ajaxlist(String id, int pw) {
-		list =  new ArrayList<MemberDTO>();
 		if (id.equals("admin") && pw == 1111) { 
 			for (int i = 1; i <= 10; i++ ) { 
 				MemberDTO dto = new MemberDTO(); 
@@ -37,14 +37,17 @@ public class AjaxAdminController {
 	return list;
 	}
 	
-	@RequestMapping(value="/getpw/{id}", produces = {"application/json;charset=utf-8"})
-	public @ResponseBody String getpw(@PathVariable("id") String id){ 
+	@ResponseBody
+	@RequestMapping("/getpw/{id}")
+	public  String getpw(@PathVariable("id") String id){ 
 		for (MemberDTO dto : list) {
-			if ((dto.getId()).equals(id)) {
-				return "{\"pw\":\"" + dto.getPw() + "\"}";
-			}
-		}
-		return "{\"pw\": \"해당아이디없음\"}";
+			if (dto.getId().equals(id)) {
+				String pw = String.valueOf(dto.getPw()); // int를 String
+				pw = pw.substring(0,2) + "*".repeat(pw.length() - 2);
+				return "{\"pw\":\""  + pw +  "\"}";
+				}
+			} // for end
+		return "{\"pw\":\"암호모름\"}";
 		
 	}
 	

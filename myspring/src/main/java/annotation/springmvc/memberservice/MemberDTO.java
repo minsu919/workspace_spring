@@ -9,7 +9,7 @@ public class MemberDTO {
 	int pw;
 	String name, phone, email, regdate;
 	
-	MemberDTO(){}
+	public MemberDTO(){}
 	MemberDTO(String id, int pw){
 		this.id = id;
 		this.pw = pw;
