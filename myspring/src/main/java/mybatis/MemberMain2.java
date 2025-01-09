@@ -1,28 +1,22 @@
 package mybatis;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
 public class MemberMain2 {
-
 	public static void main(String[] args) throws IOException, SQLException {
 		// mybatis/mybatis-config.xml 을 읽어오기
 		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
 		SqlSessionFactory factory = builder.build(Resources.getResourceAsReader("mybatis/mybatis-config.xml"));
 		// SqlSession session = factory.openSession();
 		SqlSession session = factory.openSession(true); // autocommit statement
-
 		MemberDAO dao = new MemberDAO();
 		dao.setSession(session);
-
 		MemberService service = new MemberServiceImpl();
 		((MemberServiceImpl) service).setDao(dao);
 		
@@ -49,19 +43,19 @@ public class MemberMain2 {
 //			}
 		
 		// 검색을 위해 map 전송
-		HashMap<String, String> map = new HashMap();
+//		HashMap<String, String> map = new HashMap();
 //		map.put("colname", "id");
 //		map.put("colvalue", "jdbc%");
 //		map.put("colname", "name");
 //		map.put("colvalue", "김%");
-		map.put("colname", "id");
-		map.put("colvalue", "%e%");
-		List<MemberDTO> searchlist = service.memberSearchList(map);
-		for (MemberDTO dto : searchlist) {
-			System.out.println(
-			dto.getId() + ":" + dto.getName() + ":" + dto.getRegdate() + ":" + dto.getEmail());
-			
-		}
+//		map.put("colname", "email");
+//		map.put("colvalue", "%multi%");
+//		List<MemberDTO> searchlist = service.memberSearchList(map);
+//		for (MemberDTO dto : searchlist) {
+//			System.out.println(
+//			dto.getId() + ":" + dto.getName() + ":" + dto.getRegdate() + ":" + dto.getEmail());
+//			
+//		}
 		
 //		System.out.println("===회원 리스트===");
 //		List<MemberDTO> list = service.memberList();
@@ -99,7 +93,26 @@ public class MemberMain2 {
 //		System.out.println("===회원 탈퇴===");
 //		String result3 = service.deleteMember("mybatis4");
 //		System.out.println("탈퇴결과 = " + result3);
-
+		
+		
+//		MemberDTO dto = new MemberDTO();
+//		dto.setId("jdbc");
+//		List<MemberDTO> searchlist2 = service.memberSearchList(dto);
+//		for (MemberDTO dto2 : searchlist2) {
+//		System.out.println(
+//				dto2.getId() + ":" + dto2.getName() + ":" + dto2.getRegdate() + ":" + dto2.getEmail()
+//		+ ":" + dto2.getPhone() + ":" + dto2.getRegdate());
+//		
+//		}
+//		
+//		MemberDTO dto = new MemberDTO();
+//		dto.setId("jdbc");
+//		MemberDTO resultdto = session.selectOne("totalsql",dto);
+//		for (MemberDTO dto2 : searchlist2) {
+//		System.out.println(
+//				dto2.getId() + ":" + dto2.getName() + ":" + dto2.getRegdate() + ":" + dto2.getEmail()
+//		+ ":" + dto2.getPhone() + ":" + dto2.getRegdate());
+//		
+//		}
 	}
-
 }

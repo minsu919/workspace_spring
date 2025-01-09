@@ -21,7 +21,7 @@ public class MovieController {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("moviemap", moviemap);
-		mv.setViewName("movielist");
+		mv.setViewName("movie/movielist");
 		System.out.println(mv);
 		return mv;
 	}	
@@ -35,7 +35,7 @@ public class MovieController {
 		mv.addObject("age", age);
 		mv.addObject("movies", movies);
 		mv.addObject("moviemap", moviemap);
-		mv.setViewName("moviereserve");
+		mv.setViewName("movie/moviereserve");
 		return mv;
 	}	
 	
