@@ -13,4 +13,5 @@ public interface MemberService {
 	String deleteMember(String id);
 	List<MemberDTO> memberPagingList(ArrayList list);
 	List<MemberDTO> memberSearchList(HashMap map);
+	List<MemberDTO> memberSearchList(MemberDTO dto);
 }

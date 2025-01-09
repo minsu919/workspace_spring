@@ -59,6 +59,32 @@
 		 
 		 <!-- MemberDTO dto = new MemberDTO -->
 		 <select id="memberSearchList2" resultType="memberdto" parameterType="memberdto">
-		 	select * from members where ${colname} like #{colvalue}
+		 	select * from members where 
+		 	<choose>
+		 		<when test="id != null">
+		 			id like concat(concat('%',#{id}),'%')
+		 		</when>
+		 		<when test="name != null">
+		 			name like concat(concat('%',#{name}),'%')
+		 		</when>
+		 		<when test="phone != null">
+		 			phone like concat(concat('%',#{phone}),'%')
+		 		</when>
+		 		<when test="regdate != null">
+		 			regdate like concat(concat('%',#{regdate}),'%')
+		 		</when>
+		 	</choose>
+		 	order by regdate desc
+		 </select>
+		 
+		 <sql id="selectsql">
+		 select * form members
+		 </sql>
+		 <sql id="wheresql">
+		 where id
+		 </sql>
+		 <select id="" resultType="memberdto">
+		 <include refid="selectsql"></include>
+		 <include refid="wheresql"></include>
 		 </select>
   </mapper>

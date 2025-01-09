@@ -46,7 +46,13 @@ public class MemberDAO {
 	public List<MemberDTO> memberPagingList(ArrayList list){
 		return session.selectList("memberPagingList", list);
 	}
+	
 	public List<MemberDTO> memberSearchList(HashMap map){
 		return session.selectList("memberSearchList", map);		
 	}
+	
+	public List<MemberDTO> memberSearchList2(MemberDTO dto){
+		return session.selectList("memberSearchList2", dto);		
+	}
+	
 }

@@ -77,5 +77,9 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberDTO> memberSearchList(HashMap map) {
 		return dao.memberSearchList(map);
 	}
+	@Override
+	public List<MemberDTO> memberSearchList(MemberDTO dto) {
+		return dao.memberSearchList2(dto);
+	}
 
 }
