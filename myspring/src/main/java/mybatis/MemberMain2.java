@@ -54,8 +54,8 @@ public class MemberMain2 {
 //		map.put("colvalue", "jdbc%");
 //		map.put("colname", "name");
 //		map.put("colvalue", "김%");
-		map.put("colname", "email");
-		map.put("colvalue", "%multi%");
+		map.put("colname", "id");
+		map.put("colvalue", "%e%");
 		List<MemberDTO> searchlist = service.memberSearchList(map);
 		for (MemberDTO dto : searchlist) {
 			System.out.println(
