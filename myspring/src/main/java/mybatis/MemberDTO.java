@@ -50,5 +50,7 @@ public class MemberDTO {
 		this.regdate = regdate;
 	}
 	
+
+	
 	
 }

@@ -1,8 +1,11 @@
 package mybatis;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MemberServiceImpl implements MemberService{
+
 
 	MemberDAO dao;
 	public void setDao(MemberDAO dao) {
@@ -64,5 +67,15 @@ public class MemberServiceImpl implements MemberService{
 		}
 	}
 	
+	@Override
+	public List<MemberDTO> memberPagingList(ArrayList list) {	
+		return dao.memberPagingList(list);
+
+	}
+	
+	@Override
+	public List<MemberDTO> memberSearchList(HashMap map) {
+		return dao.memberSearchList(map);
+	}
 
 }

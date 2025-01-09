@@ -7,8 +7,8 @@
 	  	select * from members
 	  </select>
 	  
-	  <select id="memberListMonth" resultType="mybatis.MemberDTO" parameterType="String">
-		select * from members where extract(month from to_date(regdate, 'YY/MM/dd')) = #{month}
+	  <select id="memberListMonth" resultType="memberdto" parameterType="String">
+		select * from members where to_char(regdate, 'mm') = #{month}
 	  </select>
 <!-- List<MemberDTO> list = session.selectList() -->
 	  <select id="oneMember" resultType="mybatis.MemberDTO" parameterType="String">
@@ -34,4 +34,31 @@
 		<delete id="deleteMember" parameterType="String">
 			delete from members where id=#{id}
 		</delete>
+		
+<!-- paging 조회 한페이지당 3명씩 -->
+		<select id="memberPagingList" resultType="memberdto" parameterType="java.util.ArrayList">
+			select id, name, regdate 
+			from (select rownum r, imsi.* 
+			from (select * from members order by regdate desc) imsi 
+			) 
+			where r between 
+			<foreach collection="list" item="num" separator="and">#{num}</foreach>
+		</select>
+		
+		<!-- int [] pw = {1111,2222,3333,4444,5555}
+		암호가 pw 배열 중 1개 일치하면 조회
+		<select id="" resultType="memberdto" parameterType="int">
+		select * from members where pw in
+		<foreach collection="array" item="num" separator="," open="(" close=")">#{num}></foreach>
+		</select>
+		 -->
+		 
+		 <select id="memberSearchList" resultType="memberdto" parameterType="hashmap">
+		 	select * from members where ${colname} like #{colvalue}
+		 </select>
+		 
+		 <!-- MemberDTO dto = new MemberDTO -->
+		 <select id="memberSearchList2" resultType="memberdto" parameterType="memberdto">
+		 	select * from members where ${colname} like #{colvalue}
+		 </select>
   </mapper>

@@ -1,5 +1,7 @@
 package mybatis;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -41,5 +43,10 @@ public class MemberDAO {
 		return session.delete("deleteMember", id);
 	}
 	
-
+	public List<MemberDTO> memberPagingList(ArrayList list){
+		return session.selectList("memberPagingList", list);
+	}
+	public List<MemberDTO> memberSearchList(HashMap map){
+		return session.selectList("memberSearchList", map);		
+	}
 }

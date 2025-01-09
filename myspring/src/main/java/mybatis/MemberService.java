@@ -1,5 +1,7 @@
 package mybatis;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface MemberService {
@@ -9,5 +11,6 @@ public interface MemberService {
 	String registerMember(MemberDTO dto);
 	String modifyMember(MemberDTO dto);
 	String deleteMember(String id);
-	
+	List<MemberDTO> memberPagingList(ArrayList list);
+	List<MemberDTO> memberSearchList(HashMap map);
 }
