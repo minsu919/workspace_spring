@@ -1,4 +1,5 @@
-package mybatis;
+package spring.mybatis;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,19 +9,15 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MemberMain2 {
 	public static void main(String[] args) throws IOException, SQLException {
-		// mybatis/mybatis-config.xml 을 읽어오기
-		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-		SqlSessionFactory factory = builder.build(Resources.getResourceAsReader("mybatis/mybatis-config.xml"));
-		// SqlSession session = factory.openSession();
-		SqlSession session = factory.openSession(true); // autocommit statement
-		MemberDAO dao = new MemberDAO();
-		dao.setSession(session);
-		MemberService service = new MemberServiceImpl();
-		((MemberServiceImpl) service).setDao(dao);
 		
+		ApplicationContext factory = new ClassPathXmlApplicationContext
+				("spring/mybatis/spring-mybatis.xml");
 		
+		MemberService service = factory.getBean("memberServiceImpl", MemberService.class);
 		// 12월에 가입한 회원 조회
 		// 호출한 결과를 리턴받아 출력
 		// 12월에 가입한 회원의 아이디 이름 가입일 출력

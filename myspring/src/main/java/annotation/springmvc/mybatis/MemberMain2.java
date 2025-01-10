@@ -1,4 +1,5 @@
-package mybatis;
+package annotation.springmvc.mybatis;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,19 +9,15 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MemberMain2 {
 	public static void main(String[] args) throws IOException, SQLException {
-		// mybatis/mybatis-config.xml 을 읽어오기
-		SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-		SqlSessionFactory factory = builder.build(Resources.getResourceAsReader("mybatis/mybatis-config.xml"));
-		// SqlSession session = factory.openSession();
-		SqlSession session = factory.openSession(true); // autocommit statement
-		MemberDAO dao = new MemberDAO();
-		dao.setSession(session);
-		MemberService service = new MemberServiceImpl();
-		((MemberServiceImpl) service).setDao(dao);
 		
+		ApplicationContext factory = new ClassPathXmlApplicationContext
+				("spring/mybatis/spring-mybatis.xml");
 		
+		MemberService service = factory.getBean("memberServiceImpl", MemberService.class);
 		// 12월에 가입한 회원 조회
 		// 호출한 결과를 리턴받아 출력
 		// 12월에 가입한 회원의 아이디 이름 가입일 출력
@@ -57,16 +54,16 @@ public class MemberMain2 {
 //			
 //		}
 		
-//		System.out.println("===회원 리스트===");
-//		List<MemberDTO> list = service.memberList();
-//		for (MemberDTO dto : list) {
-//			System.out.println(dto.getId() + ":" + dto.getName() + ":" + dto.getEmail());
-//		}
-//		System.out.println("총회원 수 = " + list.get(list.size()-1).getPw());
-//		
-//		System.out.println("===1명의 회원정보===");
-//		MemberDTO dto1 = service.oneMember("jdbc1");
-//		System.out.println(dto1.getId() + ":" + dto1.getName());
+		System.out.println("===회원 리스트===");
+		List<MemberDTO> list = service.memberList();
+		for (MemberDTO dto : list) {
+			System.out.println(dto.getId() + ":" + dto.getName() + ":" + dto.getEmail());
+		}
+		System.out.println("총회원 수 = " + list.get(list.size()-1).getPw());
+		
+		System.out.println("===1명의 회원정보===");
+		MemberDTO dto1 = service.oneMember("jdbc1");
+		System.out.println(dto1.getId() + ":" + dto1.getName());
 //		
 //		System.out.println("===회원 가입===");
 //		MemberDTO dto2 = new MemberDTO();

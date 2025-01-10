@@ -4,5 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<!-- spring-mybatis.xml 내용을 위치로 복사 
+		spring mvc 요청처리 시작 전 - sqlsession 생성 관련 작업
+	-->
 </beans>

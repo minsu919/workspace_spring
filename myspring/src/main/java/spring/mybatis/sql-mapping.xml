@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="a">
+	  <select id="memberList" resultType="memberdto">
+	  	select * from members
+	  </select>
+	  
+	  <select id="memberListMonth" resultType="memberdto" parameterType="String">
+		select * from members where to_char(regdate, 'mm') = #{month}
+	  </select>
+<!-- List<MemberDTO> list = session.selectList() -->
+	  <select id="oneMember" resultType="memberdto" parameterType="String">
+	    select * from members where id=#{id}
+	  </select>
+<!-- MemberDTO dto = session.selectOne(); -->
+		<select id="memberCount" resultType="int">
+			select count(*) from members
+		</select>
+		
+		<insert id="insertMember">
+			insert into members values('mybatis12','마이바',11111,'010-9929-3434','myba@tis.com',sysdate)
+		</insert>
+		
+		<insert id="insertMemberDTO" parameterType="memberDTO">
+			insert into members values(#{id},#{name},#{pw},#{phone},#{email},sysdate)
+		</insert>
+		
+		<update id="updateMember" parameterType="memberdto">
+			update members set pw=#{pw}, phone=#{phone}, email=#{email} where id=#{id}
+		</update>
+		
+		<delete id="deleteMember" parameterType="String">
+			delete from members where id=#{id}
+		</delete>
+		
+<!-- paging 조회 한페이지당 3명씩 -->
+		<select id="memberPagingList" resultType="memberdto" parameterType="java.util.ArrayList">
+			select id, name, regdate 
+			from (select rownum r, imsi.* 
+			from (select * from members order by regdate desc) imsi 
+			) 
+			where r between 
+			<foreach collection="list" item="num" separator="and">#{num}</foreach>
+		</select>
+		
+		<!-- int [] pw = {1111,2222,3333,4444,5555}
+		암호가 pw 배열 중 1개 일치하면 조회
+		<select id="" resultType="memberdto" parameterType="int">
+		select * from members where pw in
+		<foreach collection="array" item="num" separator="," open="(" close=")">#{num}></foreach>
+		</select>
+		 -->
+		 
+		 <select id="memberSearchList" resultType="memberdto" parameterType="hashmap">
+		 	select * from members where ${colname} like #{colvalue}
+		 </select>
+		 
+		 <!-- MemberDTO dto = new MemberDTO -->
+		 <select id="memberSearchList2" resultType="memberdto" parameterType="memberdto">
+		 	select * from members where 
+		 	<choose>
+		 		<when test="id != null">
+		 			id like concat(concat('%',#{id}),'%')
+		 		</when>
+		 		<when test="name != null">
+		 			name like concat(concat('%',#{name}),'%')
+		 		</when>
+		 		<when test="phone != null">
+		 			phone like concat(concat('%',#{phone}),'%')
+		 		</when>
+		 		<when test="regdate != null">
+		 			regdate like concat(concat('%',#{regdate}),'%')
+		 		</when>
+		 	</choose>
+		 	order by regdate desc
+		 </select>
+		 
+		 <sql id="selectsql">
+		 select * form members
+		 </sql>
+		 <sql id="wheresql">
+		 where id
+		 </sql>
+		 <select id="" resultType="memberdto">
+		 <include refid="selectsql"></include>
+		 <include refid="wheresql"></include>
+		 </select>
+  </mapper>
